@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+    <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/rain.css" />
+    <title>Remove Peter Stewart</title>
+
+
+      <script type="text/javascript" src="knockout-3.3.0.js"></script>
+ <script src="js/raphael-min.js"></script>  
+  <script src="js/rain.js"></script>
+</head>
+<body >
+
+		<!-- mail -->
+		<div id="mail" class="panel">
+			<div class="content">
+				<h2>Mail</h2>
+				<p>Here is your gun:<br>
+<br>
+<img src="img/revolver3.png" width="200">
+
+<br>
+Go to <a id="link-contact" class="button" href="#contact" data-bind='click: registerClick, disable: hasClickedTooManyTimes'>London</a> and remove Peter Stewart.<br>
+Reward: £250,000
+<br>
+<br>
+DELETE AFTER READING!!!
+</p>
+			</div>
+		</div>
+		<!-- /mail -->
+		
+		<!-- Portfolio -->
+		<div id="london" class="panel">
+			<div class="content">
+				<h2>London</h2>
+				<p>Really nice city:</p>
+			</div>
+		</div>
+		<!-- /Portfolio -->
+		
+		<!-- About -->
+		<div id="about" class="panel">
+			<div class="content">
+				<h2>About</h2>
+				<img src="http://rps.16mb.com/railway-station.png">
+				<p>It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+				<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+				<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.</p>
+				<p>She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+			</div>
+		</div>
+		<!-- /About -->
+		
+		<!-- Contact -->
+		<div id="HitByCar" class="panel">
+			<div class="content">
+				<h2 class="fail">Mission failed!</h2>
+				<p>Sudden death.<br>
+You hit by car on way to railway station.
+</p>
+			</div>
+		</div>
+		<!-- /Contact -->
+
+		<!-- Header with Navigation -->
+		<div id="header">
+			<h1>Remove<br>Peter<br>Stewart</h1>
+			<ul id="navigation">
+				<!--<li><a id="link-portfolio" href="#portfolio">Score</a></li>
+				<li><a id="link-about" href="#about">About Me</a></li>
+				<li><a id="link-contact" href="#contact">Contact</a></li>-->
+				<li><span class="stat">Cash: £400<br>
+                    HP: <span data-bind="text: hp"></span>%<br>
+                    Weapon: revolver</span></li>
+				<li><a id="link-mail" href="#mail" data-bind='click: resetClicks'>Restart</a></li>
+			</ul>
+		</div>
+		<script type='text/javascript'>
+// HP         
+    var ClickCounterViewModel = function() {
+    this.hp = ko.observable(100);
+// RANDOM
+    this.registerClick = function() {
+        if ((Math.random() * 100) <= 25)
+  {
+  this.hp(this.hp() - 100);  
+  window.location.href = "#HitByCar";
+  }
+        else
+  {
+        window.location.href = "#london";
+  }        
+    };
+ // RESTART
+    this.resetClicks = function() {
+        this.hp(100);
+        window.location.href = "#mail";
+    };
+ // to many clicks
+    this.hasClickedTooManyTimes = ko.pureComputed(function() {
+        return this.hp() >= 103;
+    }, this);
+};
+ 
+ko.applyBindings(new ClickCounterViewModel());
+    </script>
+    
+  <script>
+    new Rain('canvas', {
+      speed: 500, 
+      angle: 20, 
+      intensity: 5, 
+      size: 10,
+      color: '#e7e7e7'
+    });
+  </script>
+	</body>
+</html>
